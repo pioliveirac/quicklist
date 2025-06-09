@@ -1,4 +1,4 @@
-const items = []
+let items = []
 
 function addItem() {
 
@@ -6,7 +6,7 @@ const itemName = document.querySelector("#item").value
 
 if (itemName === "") {
 
-alert("Please enter a valid item!")
+alert("Digite um item válido!")
 
 return
 
@@ -49,6 +49,8 @@ sectionList.innerHTML += `
 
 `
 })
+
+ localStorage.setItem("items", JSON.stringify(items))
 }
 
 
@@ -84,3 +86,19 @@ function removeItem(itemName) {
     document.querySelector(".warning").classList.add("hide-warning")
 
     }
+
+    function verifyLocalStorageItems() {
+
+const localStorageItems = localStorage.getItem("items")
+
+if (localStorageItems) {
+
+items = JSON.parse(localStorageItems)
+
+showItemsList()
+
+}
+
+}
+
+verifyLocalStorageItems()
